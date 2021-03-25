@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Request } from '@nestjs/common';
 import { BindOptions } from 'node:dgram';
 import { AppService } from './app.service';
 import { Request } from 'express';
@@ -14,6 +14,7 @@ export class AppController {
 
   @Post('/payload')
   getWebhook(@Req() request: Request): Request {
+    console.log(request);
     return request;
   }
   
