@@ -12,7 +12,7 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post('/payload')
+  @Post()
   getWebhook(@Req() request: Request): Request {
     console.log(request);
     return request;
