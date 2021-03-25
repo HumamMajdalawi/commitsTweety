@@ -13,10 +13,10 @@ export class AppController {
   }
 
   @Post()
-  getWebhook(@Req() request: Request): Request {
-    
+  getWebhook(@Req() request: Request): string {
+
     console.log(request);
-    return request;
+    return JSON.stringify(request);
   }
   
 
