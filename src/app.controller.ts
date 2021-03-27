@@ -1,23 +1,19 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
-import { BindOptions } from 'node:dgram';
-import { AppService } from './app.service';
+import { Controller, Post, Req } from '@nestjs/common';
 import { Request } from 'express';
+import { tweet } from './twitter/tweet';
+
+interface commit {
+  message: string;
+}
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
   @Post()
-  getWebhook(@Req() request: Request): Object {
-
-    console.log(request.body);
-    return request.body;
+  getWebhook(@Req() request: Request): any {
+    this.passToTwitter({ message: request.body.head_commit.message });
   }
-  
 
+  passToTwitter(commit: commit) {
+    tweet(commit.message);
+  }
 }
